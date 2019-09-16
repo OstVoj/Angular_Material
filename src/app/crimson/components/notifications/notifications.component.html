@@ -1,0 +1,9 @@
+<ul *ngIf="_notificationsService.alerts.length > 0" class="alerts">
+  <li *ngFor="let alert of _notificationsService.alerts; let i = index" class="alert">
+    <div [ngClass]="getClass(alert)">
+        {{ alert.message }}
+        <mat-icon class="alert-close" (click)="delete(i)">close</mat-icon>
+    </div>
+  </li>
+</ul>
+  

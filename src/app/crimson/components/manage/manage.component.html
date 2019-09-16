@@ -1,0 +1,69 @@
+<div class="p-20">
+  <mat-toolbar class="header-container">
+    <h1>Manage</h1>
+  </mat-toolbar>
+  <div class="mat-elevation-z8">
+    <mat-form-field>
+      <input matInput placeholder="Search Shaumbras" #input>
+    </mat-form-field>
+    <mat-table #table [dataSource]="dataSource" matSort matSortActive="firstname" matSortDirection="asc" matSortDisableClear>
+      <ng-container matColumnDef="shaumbra_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'catalog-id-column'">Shaumbra ID</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row" [ngClass]="'catalog-id-column'">{{row.shaumbra_id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="firstname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'event-column'">First Name</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row" [ngClass]="'event-column'">{{row.firstname}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'catalog-type-column'">Last Name</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row" [ngClass]="'catalog-type-column'">{{row.lastname}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'email-column'">Email</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row" [ngClass]="'email-column'">{{row.email}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">{{row.city}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>State</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">{{row.state}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="zip">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Zip</mat-header-cell>
+          <mat-cell class="description-cell" *matCellDef="let row">{{row.zip}}</mat-cell>
+        </ng-container>
+
+      <ng-container matColumnDef="country">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">{{row.country}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">{{row.phone}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="isTeacher">
+        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">
+          <button mat-button color="warn" class="detail-button" *ngIf="row.isTeacher" (click)="removeTeacher(row.shaumbra_id)">Remove Teacher</button>
+          <button mat-button color="primary" class="detail-button" *ngIf="!row.isTeacher" (click)="addTeacher(row.shaumbra_id, row.email)">Add Teacher</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <app-loading [loading]="dataSource.loading$ | async"></app-loading>
+    <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons [length]="shaumbrasCount" [pageSize]="10" (page)="pageEvent = onChangePage($event)"></mat-paginator>
+  </div>
+</div>

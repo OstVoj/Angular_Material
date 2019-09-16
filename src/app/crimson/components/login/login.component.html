@@ -1,0 +1,34 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="login">
+
+
+  <mat-card class="login-card">
+    <img src="/assets/logo.jpg" class="logo" />
+    <mat-card-title>Teacher Login</mat-card-title>
+
+    <mat-card-content fxLayout="column">
+      <form name="form" [formGroup]="form" novalidate>
+
+        <mat-form-field>
+          <input matInput placeholder="Email Address" formControlName="email">
+          <mat-error *ngIf="formErrors.email.required">
+            Email Address is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password">
+          <mat-error *ngIf="formErrors.password.required">
+            Password is required.
+          </mat-error>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+
+    <div class="button-container">
+      <button mat-raised-button color="accent" [disabled]="form.invalid" (click)="onSubmit()">
+        Login
+      </button>
+    </div>
+  </mat-card>
+</div>

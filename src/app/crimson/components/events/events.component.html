@@ -1,0 +1,67 @@
+<div class="p-20">
+  <mat-toolbar class="header-container">
+    <h1>Events</h1>
+  </mat-toolbar>
+  <div class="mat-elevation-z8">
+    <mat-form-field>
+      <input matInput placeholder="Search Events" #input>
+    </mat-form-field>
+    <mat-table #table [dataSource]="dataSource" matSort matSortActive="CatalogMaster__startdate" matSortDirection="asc" matSortDisableClear>
+      <!-- <ng-container matColumnDef="TeachersEvents__id">
+        <mat-header-cell *matHeaderCellDef>Teacher Event ID</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">
+          {{row.TeachersEvents__id}}
+        </mat-cell>
+      </ng-container> -->
+
+      <ng-container matColumnDef="TeachersEvents__catalog_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'catalog-id-column'">Catalog ID</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row" [ngClass]="'catalog-id-column'">{{row.TeachersEvents__catalog_id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CatalogMaster__catalogname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'event-column'">Event</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row" [ngClass]="'event-column'">{{row.CatalogMaster__catalogname}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CatalogMaster__catalogtype">
+        <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'catalog-type-column'">Catalog Type</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row" [ngClass]="'catalog-type-column'">{{row.CatalogMaster__catalogtype}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CatalogMaster__startdate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">{{row.CatalogMaster__startdate.split('T')[0]}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CatalogMaster__enddate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">{{row.CatalogMaster__enddate.split('T')[0]}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CatalogMaster__city">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">{{row.CatalogMaster__city}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="CatalogMaster__country">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">{{row.CatalogMaster__country}}</mat-cell>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="View">
+        <mat-header-cell *matHeaderCellDef class="action-header">Action</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let row">
+          <a matLine [routerLink]="['/students', row.TeachersEvents__catalog_id]">
+            <button mat-button class="detail-button">View</button>
+          </a>
+        </mat-cell>
+      </ng-container> -->
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns" (click)="gotoEvent(row.TeachersEvents__catalog_id)"></mat-row>
+    </mat-table>
+    <app-loading [loading]="dataSource.loading$ | async"></app-loading>
+    <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons [length]="eventsCount" [pageSize]="10" (page)="pageEvent = onChangePage($event)"></mat-paginator>
+  </div>
+</div>

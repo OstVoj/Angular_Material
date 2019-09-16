@@ -1,0 +1,33 @@
+.login {
+    background-color: #710300;
+    height: 100vh;
+
+    .login-card {
+        width: 300px;
+
+        .logo {
+            display: block;
+            margin: 0 auto;
+            max-height: 200px;
+            max-width: 200px;
+        }
+
+        .mat-card-title {
+            text-align: center;
+        }
+
+        form {
+            width: 100%;
+
+            .mat-form-field {
+                width: 100%;
+            }
+        }
+
+        .button-container {
+            text-align: center;
+        }
+    }
+
+}
+

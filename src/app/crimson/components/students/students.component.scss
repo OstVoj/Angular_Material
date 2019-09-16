@@ -1,0 +1,13 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  button {
+    height: 50px;
+  }
+}
+.mat-row:hover {
+  background-color: #b4b4b433;
+  cursor: pointer;
+}

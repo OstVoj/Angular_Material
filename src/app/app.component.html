@@ -1,0 +1,47 @@
+<mat-drawer-container
+  [class.drawer-opened]="!isFullPage"
+  class="sidenav-container">
+  <mat-drawer #drawer
+    class="drawer"
+    mode="side"
+    [opened]="!isFullPage">
+    <mat-toolbar class="header">
+    </mat-toolbar>
+    <div class="contents">
+      <div class="sidenav-content">
+        <img src="/assets/logo.jpg" class="logo" />
+      </div>
+      <mat-nav-list>
+        <mat-list-item>
+          <mat-icon matListIcon>event</mat-icon>
+          <a matLine [routerLink]="['/events']">Events</a>
+        </mat-list-item>
+        <mat-list-item *ngIf="isAdmin">
+          <mat-icon matListIcon>accessibility</mat-icon>
+          <a matLine [routerLink]="['/manage']">Manage</a>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+  </mat-drawer>
+
+  <mat-toolbar
+    *ngIf="!isFullPage">
+    <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="filler"></span>
+    <span *ngIf="!isAdmin">{{ name }}</span>
+    <mat-select
+      class="select"
+      [(ngModel)]="teacher"
+      (selectionChange)="onSelectTeacher(teacher)"
+    >
+      <mat-option *ngFor="let teacher of teachers" [value]="teacher.Teachers__shaumbra_id">{{ teacher.Shaumbra__full_name }}</mat-option>
+    </mat-select>
+    <img src="/assets/profile.jpg" class="profile-image" />
+  </mat-toolbar>
+
+  <div class="main contents">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

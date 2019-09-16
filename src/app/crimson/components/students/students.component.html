@@ -1,0 +1,76 @@
+<div class="p-20">
+  <mat-toolbar>
+    <a matLine (click)="backClicked()" class="back-link">
+      <button mat-icon-button>
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+    </a>
+    <h1>Students</h1>
+    <span class="spacer"></span>
+    <button mat-raised-button color="accent" (click)="onDownload()">
+      Print All Certificates
+    </button>
+    &nbsp;
+    <button mat-raised-button color="accent" (click)="onDownloadSignInSheet()">
+      Print Sign-in Sheet
+    </button>
+  </mat-toolbar>
+  <div class="mat-elevation-z8">
+    <mat-form-field>
+      <input matInput placeholder="Search Events" #input>
+    </mat-form-field>
+    <mat-table #table [dataSource]="dataSource" matSort matSortActive="Shaumbra__shaumbra_id" matSortDirection="asc" matSortDisableClear>
+      <ng-container matColumnDef="Shaumbra__shaumbra_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Shaumbra__shaumbra_id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Email}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Date.split('T')[0]}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Shaumbra__city">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Shaumbra__city}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Shaumbra__state">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Shaumbra__state}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Shaumbra__zip">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Zip </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Shaumbra__zip}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Shaumbra__country">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Country </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Shaumbra__country}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="View">
+        <mat-header-cell *matHeaderCellDef class="action-header">Action</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-button class="detail-button" color="accent" (click)="onDownload(element.Shaumbra__shaumbra_id)">Print</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <app-loading [loading]="dataSource.loading$ | async"></app-loading>
+    <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons [length]="studentsCount" [pageSize]="10"></mat-paginator>
+  </div>
+</div>

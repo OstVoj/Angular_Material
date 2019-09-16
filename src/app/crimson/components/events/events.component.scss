@@ -1,0 +1,20 @@
+.action-header {
+  justify-content: center;
+}
+.detail-button {
+  color: rgba(0,0,0,.87);
+}
+.mat-row:hover {
+  background-color: #b4b4b433;
+  cursor: pointer;
+}
+.catalog-id-column {
+  max-width: 100px;
+}
+.event-column {
+  min-width: 400px;
+}
+.catalog-type-column {
+  display: flex;
+  justify-content: center;
+}
